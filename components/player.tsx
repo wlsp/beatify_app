@@ -32,7 +32,7 @@ export default function Player({ songs, activeSong }) {
   const [isShuffle, setShuffle] = useState(false)
   const [isDuration, setDuration] = useState(0.0)
   const soundRef = useRef(null)
-  const repeatRef = useRef(null)
+  const repeatRef = useRef(isRepeat)
   const setActiveSong = useStoreActions((state: any) => state.changeActiveSong)
 
   useEffect(() => {
@@ -191,7 +191,7 @@ export default function Player({ songs, activeSong }) {
               aria-label={['min', 'max']}
               step={0.1}
               min={0}
-              max={isDuration.toFixed(2) && 0}
+              max={isDuration ? isDuration.toFixed(2) : 0}
               id={'playerRange'}
               onChange={onSeek}
               value={[isSeek]}
@@ -201,7 +201,7 @@ export default function Player({ songs, activeSong }) {
               <RangeSliderTrack bg={'gray.800'}>
                 <RangeSliderFilledTrack bg={'gray.600'} />
               </RangeSliderTrack>
-              {/* <RangeSliderThumb index={0} /> */}
+              <RangeSliderThumb index={0} />
             </RangeSlider>
           </Box>
           <Box width={'10%'} textAlign={'right'}>

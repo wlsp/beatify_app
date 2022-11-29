@@ -5,6 +5,7 @@ import { StoreProvider } from 'easy-peasy'
 import { store } from '../lib/store'
 import PlayerLayout from '../components/playerLayout'
 import 'reset-css'
+import Head from 'next/head'
 
 const theme = extendTheme({
   colors: {
@@ -45,6 +46,9 @@ type CustomAppProps = AppProps & {
 const App = ({ Component, pageProps }: CustomAppProps) => {
   return (
     <ChakraProvider theme={theme}>
+      <Head>
+        <title>BEATIFY music</title>
+      </Head>
       <StoreProvider store={store}>
         {Component.authPage ? (
           <Component {...pageProps} />

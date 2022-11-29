@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import GradientLayout from '../../components/gradientLayout'
 import SongTable from '../../components/songsTable'
 import { validateToken } from '../../lib/auth'
@@ -28,6 +29,9 @@ export default function Playlist({ playlist }) {
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
+      <Head>
+        <title>{`BEATIFY ${playlist.name}`}</title>
+      </Head>
       <SongTable songs={playlist.songs} />
     </GradientLayout>
   )
@@ -40,10 +44,10 @@ export async function getServerSideProps({ query, req }) {
     user = validateToken(req.cookies.BEATIFY_ACESS_TOKEN)
   } catch (error) {
     return {
-      redirect : {
+      redirect: {
         permanent: false,
-        destination: '/signin'
-      }
+        destination: '/signin',
+      },
     }
   }
 
