@@ -1,8 +1,10 @@
-import type { AppProps } from 'next/app';
-import type { NextComponentType } from 'next'; // Import Component type
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import PlayerLayout from '../components/playerLayout';
-import 'reset-css';
+import type { AppProps } from 'next/app'
+import type { NextComponentType } from 'next' // Import Component type
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { StoreProvider } from 'easy-peasy'
+import { store } from '../lib/store'
+import PlayerLayout from '../components/playerLayout'
+import 'reset-css'
 
 const theme = extendTheme({
   colors: {
@@ -33,25 +35,27 @@ const theme = extendTheme({
       },
     },
   },
-});
+})
 
 //  Add custom appProp type then use union to add it
 type CustomAppProps = AppProps & {
-  Component: NextComponentType & { authPage?: boolean }; // add auth type
-};
+  Component: NextComponentType & { authPage?: boolean } // add auth type
+}
 
 const App = ({ Component, pageProps }: CustomAppProps) => {
   return (
     <ChakraProvider theme={theme}>
-      {Component.authPage ? (
-        <Component {...pageProps} />
-      ) : (
-        <PlayerLayout>
+      <StoreProvider store={store}>
+        {Component.authPage ? (
           <Component {...pageProps} />
-        </PlayerLayout>
-      )}
+        ) : (
+          <PlayerLayout>
+            <Component {...pageProps} />
+          </PlayerLayout>
+        )}
+      </StoreProvider>
     </ChakraProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

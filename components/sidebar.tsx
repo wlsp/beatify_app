@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import NextLink from 'next/link';
-import { usePlaylist } from '../lib/hooks';
+import Image from 'next/image'
+import NextLink from 'next/link'
+import { usePlaylist } from '../lib/hooks'
 import {
   Box,
   List,
@@ -9,14 +9,14 @@ import {
   Divider,
   Center,
   LinkBox,
-} from '@chakra-ui/layout';
+} from '@chakra-ui/layout'
 import {
   MdHome,
   MdSearch,
   MdLibraryMusic,
   MdPlaylistAdd,
   MdFavorite,
-} from 'react-icons/md';
+} from 'react-icons/md'
 
 const navMenu = [
   {
@@ -34,7 +34,7 @@ const navMenu = [
     icon: MdLibraryMusic,
     route: '/library',
   },
-];
+]
 
 const musicMenu = [
   {
@@ -47,35 +47,39 @@ const musicMenu = [
     icon: MdFavorite,
     route: '/favorites',
   },
-];
+]
 
 // const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
 
 const SideBar = () => {
-  const { playlists } = usePlaylist();
+  const { playlists } = usePlaylist()
   return (
     <Box
       width={'100%'}
       height={'calc(100vh - 6.25rem)'}
-      bg={'customBlack.100'}
+      bg={'black'}
       paddingX={'.3125rem'}
       color={'gray'}
     >
       <Box paddingY={'1.25rem'} height={'100%'}>
-        <Box
-          width={'9.5rem'}
-          marginBottom={'1.25rem'}
-          paddingX={'1.25rem'}
-          position={'relative'}
-        >
-          <Image
-            src={'/images/beatify.png'}
-            height={100}
-            width={120}
-            alt={'beatifyLogo'}
-            priority
-          />
-        </Box>
+        <LinkBox>
+          <NextLink href={'/'}>
+            <Box
+              width={'9.5rem'}
+              marginBottom={'1.25rem'}
+              paddingX={'1.25rem'}
+              position={'relative'}
+            >
+              <Image
+                src={'/images/beatify.png'}
+                height={100}
+                width={120}
+                alt={'beatifyLogo'}
+                priority
+              />
+            </Box>
+          </NextLink>
+        </LinkBox>
         <Box marginBottom={'1.25rem'}>
           <List spacing={2}>
             {navMenu.map((menu) => (
@@ -115,10 +119,16 @@ const SideBar = () => {
         <Divider color={'gray.500'} />
         <Box height={'66%'} overflowY={'auto'} paddingY={'1.25rem'}>
           <List spacing={0.25}>
-            {playlists.map((playlist) => (
+            {playlists?.map((playlist) => (
               <ListItem paddingX={'1.25rem'} key={playlist.id}>
                 <LinkBox>
-                  <NextLink href={'/'} passHref>
+                  <NextLink
+                    href={{
+                      pathname: '/playlist/[id]',
+                      query: { id: playlist.id },
+                    }}
+                    passHref
+                  >
                     {playlist.name}
                   </NextLink>
                 </LinkBox>
@@ -128,7 +138,7 @@ const SideBar = () => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar

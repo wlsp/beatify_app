@@ -5,14 +5,15 @@ import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
 
 export default function Home({ artists }) {
-  const { user } = useMe()
+  const { user, isLoading } = useMe()
+
   return (
     <GradientLayout
       roundImage={true}
       color={'blue'}
       subtitle={'profile'}
       title={`${user?.nameFirst} ${user?.nameLast}`}
-      description={'15 public playlists'}
+      description={`${user?.playlistsCount} public playlists`}
       image={'https://avatars.githubusercontent.com/u/81742640?v=4'}
     >
       <Box color={'white'} paddingX={'2.5rem'}>
