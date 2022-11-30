@@ -7,21 +7,21 @@ export default function PlayerBar() {
   const activeSong = useStoreState((state: any) => state.activeSong)
   return (
     <Box
-      height="6.25rem"
-      width="100vw"
-      bg="#121212"
-      padding=".625rem"
-      borderTop="1px solid"
-      borderColor="rgba(255,255,255,.2)"
+      height={'6.25rem'}
+      width={'100vw'}
+      bg={'#121212'}
+      padding={'.625rem'}
+      borderTop={'1px solid'}
+      borderColor={'rgba(255,255,255,.2)'}
     >
-      <Flex align="center">
+      <Flex align={'center'}>
         {activeSong ? (
           <Box padding={'1.25rem'} color={'white'} width={'30%'}>
             <Text>{activeSong.name}</Text>
             <Text>{activeSong.artist.name}</Text>
           </Box>
         ) : null}
-        <Box width="40%">
+        <Box width={'40%'}>
           {activeSong ? <Player songs={songs} activeSong={activeSong} /> : null}
         </Box>
       </Flex>

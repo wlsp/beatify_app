@@ -25,7 +25,7 @@ export default function Playlist({ playlist }) {
       color={color}
       roundImage={false}
       title={playlist.name}
-      subtitle='playlist'
+      subtitle={'playlist'}
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
