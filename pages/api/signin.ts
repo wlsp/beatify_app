@@ -27,6 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       httpOnly: true,
       maxAge: 8 * 60 * 60,
       path: '/',
+      
       sameSite: 'lax',
       secure: process.env.NODE === 'podruction',
     }))

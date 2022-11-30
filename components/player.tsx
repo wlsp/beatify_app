@@ -120,92 +120,94 @@ export default function Player({ songs, activeSong }) {
           onEnd={onEnd}
         />
       </Box>
-      <Center color={'gray.700'}>
+      <Center color="gray.700">
         <ButtonGroup>
           <IconButton
-            outline={'none'}
-            variant={'link'}
-            aria-label={'shuffle'}
-            fontSize={'1.5rem'}
+            outline="none"
+            variant="link"
+            aria-label="shuffle"
+            fontSize="1.5rem"
             color={isShuffle ? 'white' : 'gray.600'}
             icon={<MdShuffle />}
             onClick={onShuffle}
           />
           <IconButton
-            outline={'none'}
-            variant={'link'}
-            aria-label={'skip-previos'}
-            fontSize={'1.5rem'}
+            outline="none"
+            variant="link"
+            aria-label="skip-previos"
+            fontSize="1.5rem"
             icon={<MdSkipPrevious />}
             _hover={{ color: 'white' }}
             onClick={prevSong}
           />
           {isPlaying ? (
             <IconButton
-              outline={'none'}
-              variant={'link'}
-              aria-label={'play'}
-              fontSize={'2.5rem'}
-              color={'white'}
+              outline="none"
+              variant="link"
+              aria-label="play"
+              fontSize="2.5rem"
+              color="white"
               icon={<MdOutlinePauseCircleFilled />}
               onClick={() => setPlayState((play) => !play)}
             />
           ) : (
             <IconButton
-              outline={'none'}
-              variant={'link'}
-              aria-label={'pause'}
-              fontSize={'2.5rem'}
-              color={'white'}
+              outline="none"
+              variant="link"
+              aria-label="pause"
+              fontSize="2.5rem"
+              color="white"
               icon={<MdOutlinePlayCircleFilled />}
               onClick={() => setPlayState((play) => !play)}
             />
           )}
           <IconButton
-            outline={'none'}
-            variant={'link'}
-            aria-label={'skip-next'}
-            fontSize={'1.5rem'}
+            outline="none"
+            variant="link"
+            aria-label="skip-next"
+            fontSize="1.5rem"
             _hover={{ color: 'white' }}
             icon={<MdSkipNext />}
             onClick={nextSong}
           />
           <IconButton
-            outline={'none'}
-            variant={'link'}
-            aria-label={'repeat'}
-            fontSize={'1.5rem'}
+            outline="none"
+            variant="link"
+            aria-label="repeat"
+            fontSize="1.5rem"
             color={isRepeat ? 'white' : 'gray.600'}
             icon={<MdOutlineRepeat />}
             onClick={onRepeat}
           />
         </ButtonGroup>
       </Center>
-      <Box color={'gray.600'}>
-        <Flex justify={'center'}>
-          <Box width={'10%'}>
-            <Text fontSize={'xs'}>{formatTime(isSeek)}</Text>
+      <Box color="gray.600">
+        <Flex justify="center">
+          <Box width="10%">
+            <Text fontSize="xs">{formatTime(isSeek)}</Text>
           </Box>
-          <Box width={'80%'}>
+          <Box width="80%">
             <RangeSlider
               aria-label={['min', 'max']}
               step={0.1}
               min={0}
-              max={isDuration ? isDuration.toFixed(2) : 0}
-              id={'playerRange'}
+              max={
+                isDuration ? (isDuration.toFixed(2) as unknown as number) : 0
+              }
+              id="playerRange"
               onChange={onSeek}
               value={[isSeek]}
               onChangeStart={() => setIsSeeking(true)}
               onChangeEnd={() => setIsSeeking(false)}
             >
-              <RangeSliderTrack bg={'gray.800'}>
-                <RangeSliderFilledTrack bg={'gray.600'} />
+              <RangeSliderTrack bg="gray.800">
+                <RangeSliderFilledTrack bg="gray.600" />
               </RangeSliderTrack>
               <RangeSliderThumb index={0} />
             </RangeSlider>
           </Box>
-          <Box width={'10%'} textAlign={'right'}>
-            <Text fontSize={'xs'}>{formatTime(isDuration)}</Text>
+          <Box width="10%" textAlign="right">
+            <Text fontSize="xs">{formatTime(isDuration)}</Text>
           </Box>
         </Flex>
       </Box>

@@ -6,16 +6,18 @@ import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync()
-  const { email, password } = req.body
+  const { email, password, nameFirst, nameLast } = req.body
 
-  let user;
+  let user
 
   try {
     user = await prisma.user.create({
       data: {
         email,
         password: bcrypt.hashSync(password, salt),
-      }
+        nameFirst,
+        nameLast,
+      },
     })
   } catch (e) {
     res.status(401)
@@ -24,7 +26,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const token = jwt.sign({
-    email: user.email,
+
+    email: user.email, 
     id: user.id,
     time: Date.now()
   },
@@ -43,5 +46,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   )
 
-  res.json(user);
+  res.json(user)
 }

@@ -1,11 +1,11 @@
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import type { NextComponentType } from 'next' // Import Component type
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { StoreProvider } from 'easy-peasy'
 import { store } from '../lib/store'
 import PlayerLayout from '../components/playerLayout'
 import 'reset-css'
-import Head from 'next/head'
 
 const theme = extendTheme({
   colors: {
@@ -43,11 +43,38 @@ type CustomAppProps = AppProps & {
   Component: NextComponentType & { authPage?: boolean } // add auth type
 }
 
-const App = ({ Component, pageProps }: CustomAppProps) => {
+export default function App({ Component, pageProps }: CustomAppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
         <title>BEATIFY music</title>
+        <meta name="theme-color" content="#1e1e1e" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#fff" />
+        <meta name="theme-color" content="#fff" />
+        <meta
+          content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          name="robots"
+        />
       </Head>
       <StoreProvider store={store}>
         {Component.authPage ? (
@@ -61,5 +88,3 @@ const App = ({ Component, pageProps }: CustomAppProps) => {
     </ChakraProvider>
   )
 }
-
-export default App
