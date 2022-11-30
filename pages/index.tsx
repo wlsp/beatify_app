@@ -5,7 +5,7 @@ import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
 
 export default function Home({ artists }) {
-  const { user, isLoading } = useMe()
+  const { user } = useMe()
 
   return (
     <GradientLayout
